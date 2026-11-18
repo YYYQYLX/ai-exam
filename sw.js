@@ -1,5 +1,5 @@
 /* 离线缓存：页面走网络优先（保证更新），资源走缓存优先 */
-const VER = 'e467a048e8';
+const VER = '0d9fb1ebeb';
 const CACHE = 'aiq-' + VER;
 const CORE = [
   './',
