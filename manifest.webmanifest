@@ -1,0 +1,17 @@
+{
+  "name": "生成式 AI 职业应用师（中级）· 模拟训练",
+  "short_name": "AI 答题",
+  "description": "五套模拟卷 + 章节练习 + 随机刷题 + 实操专练",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FBFAF6",
+  "theme_color": "#1D4B43",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
