@@ -1,5 +1,5 @@
 /* 离线缓存：页面走网络优先（保证更新），资源走缓存优先 */
-const VER = '0d8d82c02c';
+const VER = '6774a6e473';
 const CACHE = 'aiq-' + VER;
 /* 只预缓存轻量资源：主页面近 1MB，首次安装时下载会拖长安装窗口，
    iOS 对安装有时间上限，超时会导致 SW 永久装不上。
@@ -28,6 +28,19 @@ self.addEventListener('activate', function (e) {
       );
     }).then(function () { return self.clients.claim(); })
   );
+});
+
+/* 页面加载完成后主动把自己写入缓存：
+   首次访问时 SW 尚未接管，这次请求不经过 fetch 事件，需要页面通知一次 */
+self.addEventListener('message', function (e) {
+  const d = e.data || {};
+  if (d.type === 'cache-self' && d.url) {
+    e.waitUntil(
+      caches.open(CACHE).then(function (c) {
+        return c.add(d.url).catch(function () {});
+      })
+    );
+  }
 });
 
 self.addEventListener('fetch', function (e) {
