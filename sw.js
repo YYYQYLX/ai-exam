@@ -1,9 +1,10 @@
 /* 离线缓存：页面走网络优先（保证更新），资源走缓存优先 */
-const VER = '0d9fb1ebeb';
+const VER = '0d8d82c02c';
 const CACHE = 'aiq-' + VER;
+/* 只预缓存轻量资源：主页面近 1MB，首次安装时下载会拖长安装窗口，
+   iOS 对安装有时间上限，超时会导致 SW 永久装不上。
+   页面本身在首次访问时由 fetch 事件写入缓存。 */
 const CORE = [
-  './',
-  './index.html',
   './manifest.webmanifest',
   './icon-180.png',
   './icon-192.png',
