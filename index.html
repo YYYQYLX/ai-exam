@@ -4270,7 +4270,13 @@ window.PAGE_ASSETS = {"datasets":{"A-42":{"id":"A-42","title":"期中考试成�
   if (!('serviceWorker' in navigator)) return;
   if (!/^https?:$/.test(location.protocol)) return;
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./sw.js').catch(function () {});
+    navigator.serviceWorker.register('./sw.js').then(function (reg) {
+      function tell() {
+        if (reg.active) reg.active.postMessage({ type: 'cache-self', url: location.href });
+      }
+      if (navigator.serviceWorker.controller) tell();
+      else navigator.serviceWorker.addEventListener('controllerchange', tell);
+    }).catch(function () {});
   });
 })();
 </script>
